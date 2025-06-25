@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lena Hamdi Alahmadi - Digital Business Card</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        /* Physical Business Card */
+        .physical-card {
+            flex: 1;
+            min-width: 350px;
+        }
+        
+        .card-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e293b;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .business-card {
+            width: 350px;
+            height: 200px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            margin: 0 auto;
+        }
+        
+        .card-left {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+        
+        .card-right {
+            flex: 2;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+        
+        .qr-section {
+            text-align: center;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .scan-text {
+            font-size: 11px;
+            color: #1e40af;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        
+        .title {
+            font-size: 14px;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .company {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .contact-info {
+            font-size: 11px;
+            color: #475569;
+            line-height: 1.6;
+        }
+        
+        .contact-item {
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-item::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: #3b82f6;
+            border-radius: 50%;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        /* Digital Business Card */
+        .digital-card {
+            flex: 1;
+            min-width: 350px;
+        }
+        
+        .digital-business-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-section {
+            margin-bottom: 30px;
+        }
+        
+        .profile-initial {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .digital-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .digital-title {
+            font-size: 18px;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .digital-company {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+        
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .contact-button {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+        
+        .save-contact-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            font-size: 16px;
+            padding: 15px 25px;
+        }
+        
+        .save-contact-btn:hover {
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .decorative-bg {
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%);
+            border-radius: 50%;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .decorative-bg2 {
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #cbd5e1 100%);
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .business-card {
+                transform: scale(0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Physical Business Card with QR -->
+        <div class="physical-card">
+            <h2 class="card-title">📄 Physical Business Card</h2>
+            <div class="business-card">
+                <div class="card-left">
+                    <div class="qr-section">
+                        <div class="qr-code">
+                            <canvas id="qr-canvas" width="100" height="100"></canvas>
+                        </div>
+                        <div class="scan-text">Scan for Digital Card</div>
+                    </div>
+                </div>
+                
+                <div class="card-right">
+                    <div class="header-info">
+                        <div class="name">Lena Hamdi Alahmadi</div>
+                        <div class="title">Data Analyst</div>
+                        <div class="company">King Salman International Airport</div>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">053 085 5555</div>
+                        <div class="contact-item">lena55alahmadi@gmail.com</div>
+                        <div class="contact-item">LinkedIn: Lena Alahmadi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Digital Business Card -->
+        <div class="digital-card">
+            <h2 class="card-title">📱 Digital Business Card Experience</h2>
+            <div class="digital-business-card">
+                <div class="decorative-bg"></div>
+                <div class="decorative-bg2"></div>
+                
+                <div class="card-content">
+                    <div class="profile-section">
+                        <div class="profile-initial">L</div>
+                        <div class="digital-name">Lena Hamdi Alahmadi</div>
+                        <div class="digital-title">Data Analyst</div>
+                        <div class="digital-company">King Salman International Airport</div>
+                    </div>
+                    
+                    <div class="contact-buttons">
+                        <a href="tel:+966530855555" class="contact-button">📞 Call: 053 085 5555</a>
+                        <a href="mailto:lena55alahmadi@gmail.com" class="contact-button">✉️ Email: lena55alahmadi@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/lena-alahmadi" target="_blank" class="contact-button">💼 LinkedIn Profile</a>
+                    </div>
+                    
+                    <button class="contact-button save-contact-btn" onclick="downloadVCard()">
+                        💾 Save to Contacts
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // This would be the URL where you host your digital business card
+        // For demonstration, I'm using a placeholder URL
+        const digitalCardURL = "https://your-website.com/lena-digital-card";
+        
+        // For demo purposes, we'll use the current page URL
+        const currentPageURL = window.location.href;
+        
+        // Generate QR code that points to the digital business card
+        const qr = new QRious({
+            element: document.getElementById('qr-canvas'),
+            value: currentPageURL, // In real use, this would be your hosted URL
+            size: 100,
+            background: 'white',
+            foreground: '#1e40af',
+            level: 'M'
+        });
+        
+        // Function to download vCard
+        function downloadVCard() {
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:Lena Hamdi Alahmadi
+N:Alahmadi;Lena;Hamdi;;
+ORG:King Salman International Airport
+TITLE:Data Analyst
+TEL:+966530855555
+EMAIL:lena55alahmadi@gmail.com
+URL:https://www.linkedin.com/in/lena-alahmadi
+END:VCARD`;
+
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Lena_Alahmadi_Contact.vcf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
