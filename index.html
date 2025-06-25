@@ -34,14 +34,6 @@
             min-width: 350px;
         }
         
-        .card-title {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #1e293b;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        
         .business-card {
             width: 350px;
             height: 200px;
@@ -70,7 +62,7 @@
             padding: 25px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
         }
         
@@ -276,7 +268,6 @@
     <div class="container">
         <!-- Physical Business Card with QR -->
         <div class="physical-card">
-            <h2 class="card-title">📄 Physical Business Card</h2>
             <div class="business-card">
                 <div class="card-left">
                     <div class="qr-section">
@@ -297,7 +288,7 @@
                     <div class="contact-info">
                         <div class="contact-item">053 085 5555</div>
                         <div class="contact-item">lena55alahmadi@gmail.com</div>
-                        <div class="contact-item">LinkedIn: Lena Alahmadi</div>
+                        <div class="contact-item">LinkedIn: lena-alahmadi-5949a2251</div>
                     </div>
                 </div>
             </div>
@@ -305,7 +296,6 @@
         
         <!-- Digital Business Card -->
         <div class="digital-card">
-            <h2 class="card-title">📱 Digital Business Card Experience</h2>
             <div class="digital-business-card">
                 <div class="decorative-bg"></div>
                 <div class="decorative-bg2"></div>
@@ -319,13 +309,13 @@
                     </div>
                     
                     <div class="contact-buttons">
-                        <a href="tel:+966530855555" class="contact-button">📞 Call: 053 085 5555</a>
-                        <a href="mailto:lena55alahmadi@gmail.com" class="contact-button">✉️ Email: lena55alahmadi@gmail.com</a>
-                        <a href="https://www.linkedin.com/in/lena-alahmadi" target="_blank" class="contact-button">💼 LinkedIn Profile</a>
+                        <a href="tel:+966530855555" class="contact-button">Call: 053 085 5555</a>
+                        <a href="mailto:lena55alahmadi@gmail.com" class="contact-button">Email: lena55alahmadi@gmail.com</a>
+                        <a href="https://www.linkedin.com/in/lena-alahmadi-5949a2251" target="_blank" class="contact-button">LinkedIn Profile</a>
                     </div>
                     
                     <button class="contact-button save-contact-btn" onclick="downloadVCard()">
-                        💾 Save to Contacts
+                        Save to Contacts
                     </button>
                 </div>
             </div>
@@ -334,16 +324,12 @@
 
     <script>
         // This would be the URL where you host your digital business card
-        // For demonstration, I'm using a placeholder URL
-        const digitalCardURL = "https://your-website.com/lena-digital-card";
-        
-        // For demo purposes, we'll use the current page URL
-        const currentPageURL = window.location.href;
+        const digitalCardURL = "https://lena55a.github.io/lena-business-card";
         
         // Generate QR code that points to the digital business card
         const qr = new QRious({
             element: document.getElementById('qr-canvas'),
-            value: currentPageURL, // In real use, this would be your hosted URL
+            value: digitalCardURL,
             size: 100,
             background: 'white',
             foreground: '#1e40af',
@@ -360,7 +346,7 @@ ORG:King Salman International Airport
 TITLE:Data Analyst
 TEL:+966530855555
 EMAIL:lena55alahmadi@gmail.com
-URL:https://www.linkedin.com/in/lena-alahmadi
+URL:https://www.linkedin.com/in/lena-alahmadi-5949a2251
 END:VCARD`;
 
             const blob = new Blob([vCardData], { type: 'text/vcard' });
